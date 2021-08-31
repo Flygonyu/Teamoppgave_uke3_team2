@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle</title>
+<style>
+  body{
+    background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/53554260151341.5a3e34830d41b.jpg);
+  
+  }
+  #brett {
+    width: 600px;
+    height: 600px;
+    /* background-color: rgb(134, 86, 64); */
+    border: rgb(78, 56, 56) 40px outset;
+    /* box-sizing: border-box; */
+    margin-left: 750px;
+    margin-top:50px;
+    
+  }
+  #brikkerUtenfor{
+    width: 650px;
+    height: 800px;
+    background-color: rgb(130, 196, 130);
+    /* margin:auto; */
+    position: absolute;
+    border: rgba(90, 61, 33, 0.993) inset 20px;
+    
+  }
+  
+  .enkeltBrikkeUtenfor {
+    width: 200px;
+    height: 200px;
+    /* background-color: rgb(225, 188, 241); */
+    float: left;
+    /* outline:rgb(185, 185, 236) 1px solid; */
+    margin:8px;
+    
+  }
+  
+  .skjult {
+    display:none;
+  }
+
+  .clickHighlight{
+      outline: rgb(65, 65, 65) solid 3px;
+  }
+
+  /* .hoverHighlight {
+    outline: rgb(177, 177, 177) solid 3px;
+  } */
+
+  
+  div.sub {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(36, 24, 24, 0.596);
+    float: left;
+    outline:rgb(0, 0, 0) 1px solid;
+    /* margin: 1px; */
+  }
+
+  img {
+    width:200px;
+    height:200px;
+    display: block;
+  }
+
+  #brikkerUtenfor img:hover {
+    opacity: 0.5;
+    /* box-shadow: -6px 3px 4px -30px #000000; */
+    /* border: 3px solid rgb(209, 209, 209); */
+  }
+ img.terje {
+   height: 600px;
+   width: 600px;
+  margin: auto;
+ }
+
+ h1 {
+   font-size: 50px;
+   text-align: center;
+   color: hotpink;
+ }
+  
+</style>
+  
+</head>
+<body>
+  
+
+  
+<!-- <section id='app'></section> -->
+
+<div id="brikkerUtenfor">
+  <div id="r1k1" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r1k1'"><img src="1.jpg"></div>
+  <div id="r1k2" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r1k2'"><img src="2.jpg"></div>
+  <div id="r1k3" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r1k3'"><img src="3.jpg"></div>
+  <div id="r2k1" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r2k1'"><img src="6.jpg"></div>
+  <div id="r2k2" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r2k2'"><img src="5.jpg"></div>
+  <div id="r2k3" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r2k3'"><img src="4.jpg"></div>
+  <div id="r3k1" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r3k1'"><img src="7.jpg"></div>
+  <div id="r3k2" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r3k2'"><img src="8.jpg"></div>
+  <div id="r3k3" class="enkeltBrikkeUtenfor" onclick="velgBilde(this), plukketBrikke = 'r3k3'"><img src="9.jpg"></div>
+</div>
+
+<div id="brett">
+  <div id="R1K1ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R1K2ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R1K3ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R2K1ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R2K2ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R2K3ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R3K1ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R3K2ON" class="sub" onclick="limInn(this)"></div>
+  <div id="R3K3ON" class="sub" onclick="limInn(this)"></div>
+</div>
+
+
+
+
+<script>
+  let plukketBrikke = '';
+  let winCondition ='0';
+  let grab = '';
+
+  function limInn(x){
+    x.innerHTML = grab;
+    let element = document.getElementById(`${plukketBrikke}`);
+    element.classList.add('skjult');
+
+
+    if   (document.getElementById('R1K1ON').innerHTML.includes('9.jpg') 
+       && document.getElementById('R1K2ON').innerHTML.includes('8.jpg') 
+       && document.getElementById('R1K3ON').innerHTML.includes('7.jpg')
+       && document.getElementById('R2K1ON').innerHTML.includes('6.jpg')
+       && document.getElementById('R2K2ON').innerHTML.includes('5.jpg')
+       && document.getElementById('R2K3ON').innerHTML.includes('4.jpg')
+       && document.getElementById('R3K1ON').innerHTML.includes('3.jpg')
+       && document.getElementById('R3K2ON').innerHTML.includes('2.jpg')
+       && document.getElementById('R3K3ON').innerHTML.includes('1.jpg'))  
+       {
+      winCondition = '1';
+      }
+      if (winCondition == '1') {
+        setTimeout(function(){ 
+          document.getElementById('brikkerUtenfor').innerHTML = 
+          '<img class="terje" src="https://pbs.twimg.com/profile_images/1359478001/Terje_Kolderup_400x400.jpg"><h1>Du klarte det!</h1>'
+        }, 500);
+        
+        }
+ }
+  function velgBilde(x) {
+    grab = x.innerHTML;
+    x.classList.toggle('clickHighlight');
+    
+    
+  }
+
+  // function hover(x) {
+  //   x.classList.add('hoverHighlight');
+  // }
+</script> 
+<!-- <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Test-Logo.svg" draggable= "true"> -->
+
+
+</body>
+</html>
